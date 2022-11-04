@@ -5,6 +5,7 @@ SignedS2V learns the embeddings for nodes based on the structural features.
 
 # Installation
 Packages needed: 
+
 	pip install futures
 	pip install fastdtw
 	pip install gensim
