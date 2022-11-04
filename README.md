@@ -4,7 +4,10 @@ Code for paper titled as "SignedS2V: structural embedding method for signed netw
 SignedS2V learns the embeddings for nodes based on the structural features.
 
 # Installation
-Packages needed: futures, fastdtw, gensim
+Packages needed: 
+	pip install futures
+	pip install fastdtw
+	pip install gensim
 
 # Usage
 ## Input
