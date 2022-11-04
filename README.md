@@ -27,7 +27,7 @@ Edgelist of a signed network, 3 columns (node1 node2 sign). sign={-1,1}
 	'--scalefree': scale free flag
   
 ## Command example
-  python src/main.py --input graph/mirrored_karate_sign.edgelist --num-walks 20 --walk-length 80 --window-size 5 --dimensions 2 --until-layer 5 --workers 8 --OPT1 --OPT2 --OPT3 --scalefree
+  	python src/main.py --input graph/mirrored_karate_sign.edgelist --num-walks 20 --walk-length 80 --window-size 5 --dimensions 2 --until-layer 5 --workers 8 --OPT1 --OPT2 --OPT3 --scalefree
 
 # Miscellaneous
   Feel free to send email to liu@torilab.net for any questions about the code or the paper.
