@@ -4,7 +4,7 @@ import argparse, logging
 from gensim.models import Word2Vec
 from gensim.models.word2vec import LineSentence
 from time import time
-
+import os
 import signeds2v
 import graph
 logging.basicConfig(filename='signeds2v.log',filemode='w',level=logging.DEBUG,format='%(asctime)s %(message)s')
@@ -71,14 +71,26 @@ def read_graph_signed():
 	logging.info(" - Signed Graph loaded.")
 	return Gp, Gm
 
-def learn_embeddings(basename):
+def learn_embeddings(basename, output):
 	'''
 	Learn embeddings by optimizing the Skipgram objective using SGD.
 	'''
 	logging.info("Initializing creation of the representations...")
 	walks = LineSentence('random_walks.txt')
 	model = Word2Vec(walks, vector_size=args.dimensions, window=args.window_size, min_count=0, hs=0, sg=1,negative=5, ns_exponent=0.75, workers=args.workers, epochs=args.iter)
-	model.wv.save_word2vec_format("emb/{}.emb".format(basename))
+	if (output is not None):
+		basename = output
+		directory_path = os.path.dirname(basename)
+		if not os.path.exists(directory_path):
+			try:
+				os.makedirs(directory_path)
+				print(f"Directory '{directory_path}' created.")
+			except OSError as e:
+				print(f"Error creating directory '{directory_path}': {e}")
+				return
+	else:
+		basename = "emb/{}.emb".format(basename)
+	model.wv.save_word2vec_format(basename)
 	logging.info("Representations created.")
 	return
 
@@ -117,11 +129,7 @@ def main(args):
 	print('Process start')
 	G = exec_signeds2v_complex(args)
 	print('complete network generations.')
-	if (args.output is not None):
-		basename = args.output
-	else:
-		basename = args.input.split("/")[1].split(".")[0]
-	learn_embeddings(basename)
+	learn_embeddings(args.input.split("/")[1].split(".")[0], args.output)
 
 if __name__ == "__main__":
 	args = parse_args()
