@@ -20,8 +20,8 @@ class Graph_complex():
 		self.G_p.update(g1.gToDict())
 		self.G_n.update(g2.gToDict())
 		logging.info("Graph converted.")
-		self.p_max_degree = g1.maxDegree()
-		self.n_max_degree = g2.maxDegree()
+		# self.p_max_degree = g1.maxDegree()
+		# self.n_max_degree = g2.maxDegree()
 
 		self.num_vertices = len(set(list(g1.nodes()) + list(g2.nodes())))
 		self.num_edges = g1.number_of_edges() + g2.number_of_edges()
@@ -30,7 +30,6 @@ class Graph_complex():
 		self.calcUntilLayer = untilLayer
 		logging.info('Graph - Number of vertices: {}'.format(self.num_vertices))
 		logging.info('Graph - Number of edges: {}'.format(self.num_edges))
-
 
 	def preprocess_neighbors_with_bfs(self):
 		# exec_bfs_complex(self.G_p,self.G_n,self.workers,self.calcUntilLayer)

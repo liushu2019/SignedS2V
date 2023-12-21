@@ -7,7 +7,11 @@ from io import open
 from time import time
 from six.moves import range, zip, zip_longest
 from six import iterkeys
-from collections import defaultdict, Iterable
+from collections import defaultdict
+try:
+  from collections import Iterable
+except ImportError:
+  from collections.abc import Iterable
 from multiprocessing import cpu_count
 from itertools import permutations
 
