@@ -93,11 +93,15 @@ def getCompactDegreeLists_complex(Gp,Gn, root, maxDegree,calcUntilLayer):
     return listas
 
 def getDegreeLists_complex(gp, gn, root, calcUntilLayer):
+    # print (gp, gn, max(gn))
     t0 = time()
 
     listas = {}
-    vetor_marcacao = [0] * (max(max(gp), max(gn)) + 1)
-
+    
+    list_gp = list(gp.keys()) if len(gp) > 0 else []
+    list_gn = list(gn.keys()) if len(gn) > 0 else []
+    vertices = list(set(list_gp + list_gn))
+    vetor_marcacao = [0] * (max(vertices) + 1)
     # Marcar s e inserir s na fila Q
     queue = deque()
     queue.append(root)
@@ -147,8 +151,7 @@ def getDegreeLists_complex(gp, gn, root, calcUntilLayer):
 
     t1 = time()
     logging.info('BFS vertex {}. Time: {}s'.format(root,(t1-t0)))
-
-
+    
     return listas
 
 def cost(a,b):
@@ -902,7 +905,9 @@ def exec_bfs_complex(Gp,Gn,workers,calcUntilLayer):
     degreeList = {}
 
     t0 = time()
-    vertices = list(set(list(Gp.keys()) + list(Gn.keys())))
+    list_gp = list(Gp.keys()) if len(Gp) > 0 else []
+    list_gn = list(Gn.keys()) if len(Gn) > 0 else []
+    vertices = list(set(list_gp + list_gn))
     parts = workers
     chunks = partition(vertices,parts)
     # for c in chunks:

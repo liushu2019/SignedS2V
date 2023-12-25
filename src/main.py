@@ -7,6 +7,10 @@ from time import time
 import os
 import signeds2v
 import graph
+import warnings
+
+# This will suppress all warnings
+warnings.filterwarnings("ignore")
 logging.basicConfig(filename='signeds2v.log',filemode='w',level=logging.DEBUG,format='%(asctime)s %(message)s')
 
 def parse_args():
